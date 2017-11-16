@@ -1,5 +1,23 @@
 <template>
   <div>
+    <transition name="congratsModal">
+      <template v-if="isCleared">
+        <div class="congrats">
+          <div class="congrats__catch">
+            <div class="congratsText">
+              Congraturations!
+            </div>
+            <button @click="reset()">Try Again?</button>
+          </div>
+        </div>
+      </template>
+    </transition>
+
+    <div class="systemBtns">
+      <button @click="reset()">Reset</button>
+      <button @click="cheat()">Cheat!</button>
+    </div>
+
     <div class="bingoWrap">
       <div
         class="bingoWrap__single"
@@ -16,6 +34,7 @@
 export default {
   data () {
     return {
+      isCleared: false,
       buttons: [
         { number: 0, isActive: false, wall: ['top', 'left'] },
         { number: 1, isActive: false, wall: ['top'] },
@@ -68,20 +87,24 @@ export default {
         bottomBtn.isActive = !bottomBtn.isActive
       }
 
-      this.check()
+      this.checkList()
+    },
+    cheat () {
+      for (let i = 0; i < this.buttons.length; i++) {
+        this.buttons[i].isActive = true
+      }
+      this.isCleared = true
     },
     reset () {
+      this.isCleared = false
       for (let i = 0; i < this.buttons.length; i++) {
         this.buttons[i].isActive = false
       }
     },
-    check () {
+    checkList () {
       let checkList = this.buttons.map(obj => obj.isActive)
-
-      if (checkList.indexOf('false') !== -1) {
-        console.log('congrats!')
-      } else {
-        console.log('undone')
+      if (checkList.indexOf(false) === -1) {
+        this.isCleared = true
       }
     }
   }
@@ -93,6 +116,20 @@ export default {
   box-sizing: border-box;
 }
 
+.systemBtns{
+  position: absolute;
+  top: 0;
+  right: 1rem;
+}
+
+button{
+  background: #333;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  font-size: 0.7rem;
+  padding:0.5rem;
+}
 
 .bingoWrap{
   position: absolute;
@@ -116,6 +153,11 @@ export default {
     font-size: 1.1rem;
     transition: 0.15s;
     border-radius: 3px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: #444;
+    }
 
     &:after{
       content: "";
@@ -128,10 +170,55 @@ export default {
     }
 
     &.active{
-      background-color: #00bbdd;
+      background-color: #fff;
       color: #fff;
       font-weight: bold;
     }
+  }
+}
+
+.congrats{
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &__catch {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &Text{
+    color: #333;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.congratsModal-enter-active{
+  animation: congratsModal-in 1.5s;
+}
+.congratsModal-leave-active {
+  animation: congratsModal-in .5s reverse;
+}
+@keyframes congratsModal-in {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
