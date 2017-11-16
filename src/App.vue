@@ -37,4 +37,13 @@ html,body{
   text-align: center;
   color: #2c3e50;
 }
+button{
+  background: #333;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  font-size: 0.7rem;
+  padding:0.5rem;
+  cursor: pointer;
+}
 </style>
