@@ -1,29 +1,26 @@
 <template>
   <div>
     <transition name="congratsModal">
-      <template v-if="isCleared">
+      <template v-if="this.$store.state.isCleared">
         <div class="congrats">
           <div class="congrats__catch">
             <div class="congratsText">
               Congraturations!
             </div>
-            <button @click="reset()">Try Again?</button>
+            <button @click="reset">Try Again?</button>
           </div>
         </div>
       </template>
     </transition>
 
-    <div class="systemBtns">
-      <button @click="reset()">Reset</button>
-      <button @click="cheat()">Cheat!</button>
-    </div>
+    <systemBtns />
 
     <div class="bingoWrap">
       <div
         class="bingoWrap__single"
-        v-for="(item, index) in buttons"
+        v-for="(item, index) in this.$store.state.buttons"
         :class="{ active: item.isActive }"
-        @click="clicked(item.number)"
+        @click="clicked(item.number) + checkList()"
       >
       </div>
     </div>
@@ -31,48 +28,26 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import systemBtns from './systemBtns'
+
 export default {
   data () {
     return {
-      isCleared: false,
-      buttons: [
-        { number: 0, isActive: false, wall: ['top', 'left'] },
-        { number: 1, isActive: false, wall: ['top'] },
-        { number: 2, isActive: false, wall: ['top'] },
-        { number: 3, isActive: false, wall: ['top'] },
-        { number: 4, isActive: false, wall: ['top', 'right'] },
-        { number: 5, isActive: false, wall: ['left'] },
-        { number: 6, isActive: false, wall: [] },
-        { number: 7, isActive: false, wall: [] },
-        { number: 8, isActive: false, wall: [] },
-        { number: 9, isActive: false, wall: ['right'] },
-        { number: 10, isActive: false, wall: ['left'] },
-        { number: 11, isActive: false, wall: [] },
-        { number: 12, isActive: false, wall: [] },
-        { number: 13, isActive: false, wall: [] },
-        { number: 14, isActive: false, wall: ['right'] },
-        { number: 15, isActive: false, wall: ['left'] },
-        { number: 16, isActive: false, wall: [] },
-        { number: 17, isActive: false, wall: [] },
-        { number: 18, isActive: false, wall: [] },
-        { number: 19, isActive: false, wall: ['right'] },
-        { number: 20, isActive: false, wall: ['left', 'bottom'] },
-        { number: 21, isActive: false, wall: ['bottom'] },
-        { number: 22, isActive: false, wall: ['bottom'] },
-        { number: 23, isActive: false, wall: ['bottom'] },
-        { number: 24, isActive: false, wall: ['right', 'bottom'] }
-      ]
     }
+  },
+  components: {
+    systemBtns
   },
   methods: {
     clicked (num) {
-      let wall = this.buttons[num].wall
-      let rightBtn = this.buttons[num + 1]
-      let leftBtn = this.buttons[num - 1]
-      let topBtn = this.buttons[num - 5]
-      let bottomBtn = this.buttons[num + 5]
+      let wall = this.$store.state.buttons[num].wall
+      let rightBtn = this.$store.state.buttons[num + 1]
+      let leftBtn = this.$store.state.buttons[num - 1]
+      let topBtn = this.$store.state.buttons[num - 5]
+      let bottomBtn = this.$store.state.buttons[num + 5]
 
-      this.buttons[num].isActive = !this.buttons[num].isActive
+      this.$store.state.buttons[num].isActive = !this.$store.state.buttons[num].isActive
 
       if (wall.indexOf('left') === -1) {
         leftBtn.isActive = !leftBtn.isActive
@@ -86,27 +61,12 @@ export default {
       if (wall.indexOf('bottom') === -1) {
         bottomBtn.isActive = !bottomBtn.isActive
       }
-
-      this.checkList()
     },
-    cheat () {
-      for (let i = 0; i < this.buttons.length; i++) {
-        this.buttons[i].isActive = true
-      }
-      this.isCleared = true
-    },
-    reset () {
-      this.isCleared = false
-      for (let i = 0; i < this.buttons.length; i++) {
-        this.buttons[i].isActive = false
-      }
-    },
-    checkList () {
-      let checkList = this.buttons.map(obj => obj.isActive)
-      if (checkList.indexOf(false) === -1) {
-        this.isCleared = true
-      }
-    }
+    ...mapActions([
+      'reset',
+      'cheat',
+      'checkList'
+    ])
   }
 }
 </script>
@@ -114,21 +74,6 @@ export default {
 <style lang="scss" scoped>
 *{
   box-sizing: border-box;
-}
-
-.systemBtns{
-  position: absolute;
-  top: 0;
-  right: 1rem;
-}
-
-button{
-  background: #333;
-  color: #fff;
-  border: none;
-  font-weight: bold;
-  font-size: 0.7rem;
-  padding:0.5rem;
 }
 
 .bingoWrap{

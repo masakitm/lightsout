@@ -1,21 +1,14 @@
-# transit
+# LightsOut
 
-> A Vue.js project
+> 昔なつかしいライツアウトをブラウザで再現しました
 
-## Build Setup
+## Details
 
-``` bash
-# install dependencies
-npm install
+基本ルールはおもちゃのライツアウトと同じです。
+押したボタンとその上下左右ボタンの点灯状態が切り替わります。
+この特性を利用して全てのボタンを白く点灯させればクリアです。
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Reset 盤面をリセットします
+Cheat! 押すとクリア扱いになります
+```
