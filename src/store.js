@@ -42,16 +42,21 @@ const mutations = {
     }
   },
   cheat (state) {
+    // 一発クリア
     for (let i = 0; i < state.buttons.length; i++) {
       state.buttons[i].isActive = true
     }
     state.isCleared = true
   },
   checkList (state) {
+    // 盤面確認
     let checkList = state.buttons.map(obj => obj.isActive)
     if (checkList.indexOf(false) === -1) {
       state.isCleared = true
     }
+  },
+  random () {
+    // 盤面をランダムにする
   }
 }
 

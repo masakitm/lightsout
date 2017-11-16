@@ -82,7 +82,6 @@ export default {
   left: 50%;
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
-
   display: flex;
   flex-wrap: wrap;
   width: calc(90px * 5 + 20px;
@@ -92,7 +91,6 @@ export default {
     position: relative;
     width: 90px;
     height: 90px;
-    line-height: 100px;
     background-color: #333;
     margin: 2px;
     font-size: 1.1rem;
@@ -118,6 +116,16 @@ export default {
       background-color: #fff;
       color: #fff;
       font-weight: bold;
+    }
+  }
+
+  @media only screen and (max-width:960px){
+    &{
+      width: calc(40px * 5 + 20px;
+    }
+    &__single{
+      width: 40px;
+      height: 40px;
     }
   }
 }
