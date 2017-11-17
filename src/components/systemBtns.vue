@@ -1,5 +1,6 @@
 <template>
   <div class="systemBtns">
+    <button @click="randomStart()">Random</button>
     <button @click="reset()">Reset</button>
     <button @click="cheat()">Cheat!</button>
   </div>
@@ -12,7 +13,8 @@ export default {
   methods: {
     ...mapActions([
       'reset',
-      'cheat'
+      'cheat',
+      'randomStart'
     ])
   }
 }
