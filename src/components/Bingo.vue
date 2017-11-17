@@ -97,6 +97,7 @@ export default {
     transition: 0.15s;
     border-radius: 3px;
     cursor: pointer;
+    transform:perspective(600px) rotateX(180deg);
 
     &:hover{
       background-color: #444;
@@ -116,16 +117,17 @@ export default {
       background-color: #fff;
       color: #fff;
       font-weight: bold;
+      transform:perspective(600px) rotateX(0deg);
     }
   }
 
   @media only screen and (max-width:960px){
     &{
-      width: calc(40px * 5 + 20px;
+      width: calc(18vw * 5 + 20px;
     }
     &__single{
-      width: 40px;
-      height: 40px;
+      width: 18vw;
+      height: 18vw;
     }
   }
 }
