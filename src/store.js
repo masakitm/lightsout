@@ -55,15 +55,24 @@ const mutations = {
       state.isCleared = true
     }
   },
-  random () {
+  randomStart () {
     // 盤面をランダムにする
+    for (let i = 0; i < state.buttons.length; i++) {
+      let n = Math.random()
+      if (n < 0.6) {
+        state.buttons[i].isActive = true
+      } else {
+        state.buttons[i].isActive = false
+      }
+    }
   }
 }
 
 const actions = {
   reset: ({ commit }) => commit('reset'),
   cheat: ({ commit }) => commit('cheat'),
-  checkList: ({ commit }) => commit('checkList')
+  checkList: ({ commit }) => commit('checkList'),
+  randomStart: ({commit}) => commit('randomStart')
 }
 
 export default new Vuex.Store({

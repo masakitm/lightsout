@@ -128,6 +128,10 @@ export default {
     &__single{
       width: 18vw;
       height: 18vw;
+
+      &:hover{
+        opacify: 1;
+      }
     }
   }
 }
@@ -153,6 +157,12 @@ export default {
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
+
+    @media only screen and (max-width:960px){
+      &{
+        font-size: 2rem;
+      }
+    }
   }
 }
 
