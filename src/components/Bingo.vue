@@ -1,19 +1,6 @@
 <template>
   <div>
-    <transition name="congratsModal">
-      <template v-if="this.$store.state.isCleared">
-        <div class="congrats">
-          <div class="congrats__catch">
-            <div class="congratsText">
-              Congraturations!
-            </div>
-            <button @click="reset">Try Again?</button>
-          </div>
-        </div>
-      </template>
-    </transition>
-
-    <systemBtns />
+    <Congrats />
 
     <div class="bingoWrap">
       <div
@@ -29,16 +16,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import systemBtns from './systemBtns'
-
 export default {
-  data () {
-    return {
-    }
-  },
-  components: {
-    systemBtns
-  },
   methods: {
     clicked (num) {
       let wall = this.$store.state.buttons[num].wall
@@ -94,7 +72,7 @@ export default {
     background-color: #333;
     margin: 2px;
     font-size: 1.1rem;
-    transition: 0.15s;
+    transition: 0.14s;
     border-radius: 3px;
     cursor: pointer;
     transform:perspective(600px) rotateX(180deg);
@@ -121,7 +99,7 @@ export default {
     }
   }
 
-  @media only screen and (max-width:960px){
+  @media only screen and (orientation: portrait){
     &{
       width: calc(18vw * 5 + 20px;
     }
@@ -135,57 +113,4 @@ export default {
     }
   }
 }
-
-.congrats{
-  background-color: rgba(255, 255, 255, 0.8);
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  &__catch {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &Text{
-    color: #333;
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-
-    @media only screen and (max-width:960px){
-      &{
-        font-size: 2rem;
-      }
-    }
-  }
-}
-
-.congratsModal-enter-active{
-  animation: congratsModal-in 1.5s;
-}
-.congratsModal-leave-active {
-  animation: congratsModal-in .5s reverse;
-}
-@keyframes congratsModal-in {
-  0% {
-    transform: scale(0);
-  }
-  25% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-
 </style>

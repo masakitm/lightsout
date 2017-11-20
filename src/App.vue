@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <Splash />
+    <Congrats />
     <HeaderParts />
     <Bingo />
   </div>
@@ -8,12 +10,16 @@
 <script>
 import HeaderParts from './components/HeaderParts'
 import Bingo from './components/Bingo'
+import Congrats from './components/Congrats'
+import Splash from './components/Splash'
 
 export default {
   name: 'app',
   components: {
     Bingo,
-    HeaderParts
+    HeaderParts,
+    Congrats,
+    Splash
   }
 }
 </script>

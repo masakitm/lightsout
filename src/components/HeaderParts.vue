@@ -3,11 +3,17 @@
     <h1 class="title">
       <p class="title__text">Lights Out</p>
     </h1>
+    <systemBtns />
   </header>
 </template>
 
 <script>
+import systemBtns from './systemBtns'
+
 export default {
+  components: {
+    systemBtns
+  }
 }
 </script>
 

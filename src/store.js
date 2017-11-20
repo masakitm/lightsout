@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const state = {
   isCleared: false,
+  splashOpen: false,
   buttons: [
     { number: 0, isActive: false, wall: ['top', 'left'] },
     { number: 1, isActive: false, wall: ['top'] },
@@ -35,6 +36,9 @@ const state = {
 }
 
 const mutations = {
+  viewed (state) {
+    state.isFirstView = true
+  },
   reset (state) {
     state.isCleared = false
     for (let i = 0; i < state.buttons.length; i++) {
@@ -55,7 +59,7 @@ const mutations = {
       state.isCleared = true
     }
   },
-  randomStart () {
+  randomStart (state) {
     // 盤面をランダムにする
     for (let i = 0; i < state.buttons.length; i++) {
       let n = Math.random()
@@ -65,6 +69,13 @@ const mutations = {
         state.buttons[i].isActive = false
       }
     }
+  },
+  splashOpen (state) {
+    // 説明文出す
+    state.splashOpen = true
+    setTimeout(function () {
+      state.splashOpen = false
+    }, 5000)
   }
 }
 
@@ -72,7 +83,9 @@ const actions = {
   reset: ({ commit }) => commit('reset'),
   cheat: ({ commit }) => commit('cheat'),
   checkList: ({ commit }) => commit('checkList'),
-  randomStart: ({commit}) => commit('randomStart')
+  randomStart: ({ commit }) => commit('randomStart'),
+  viewed: ({ commit }) => commit('viewed'),
+  splashOpen: ({ commit }) => commit('splashOpen')
 }
 
 export default new Vuex.Store({

@@ -1,5 +1,6 @@
 <template>
   <div class="systemBtns">
+    <button @click="splashOpen()">Rules</button>
     <button @click="randomStart()">Random</button>
     <button @click="reset()">Reset</button>
     <button @click="cheat()">Cheat!</button>
@@ -14,7 +15,8 @@ export default {
     ...mapActions([
       'reset',
       'cheat',
-      'randomStart'
+      'randomStart',
+      'splashOpen'
     ])
   }
 }
