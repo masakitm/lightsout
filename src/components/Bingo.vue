@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Congrats />
-
     <div class="bingoWrap">
       <div
         class="bingoWrap__single"
@@ -19,26 +17,7 @@ import { mapActions } from 'vuex'
 export default {
   methods: {
     clicked (num) {
-      let wall = this.$store.state.buttons[num].wall
-      let rightBtn = this.$store.state.buttons[num + 1]
-      let leftBtn = this.$store.state.buttons[num - 1]
-      let topBtn = this.$store.state.buttons[num - 5]
-      let bottomBtn = this.$store.state.buttons[num + 5]
-
-      this.$store.state.buttons[num].isActive = !this.$store.state.buttons[num].isActive
-
-      if (wall.indexOf('left') === -1) {
-        leftBtn.isActive = !leftBtn.isActive
-      }
-      if (wall.indexOf('right') === -1) {
-        rightBtn.isActive = !rightBtn.isActive
-      }
-      if (wall.indexOf('top') === -1) {
-        topBtn.isActive = !topBtn.isActive
-      }
-      if (wall.indexOf('bottom') === -1) {
-        bottomBtn.isActive = !bottomBtn.isActive
-      }
+      this.$store.dispatch('clicked', num)
     },
     ...mapActions([
       'reset',

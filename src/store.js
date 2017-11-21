@@ -76,6 +76,28 @@ const mutations = {
     setTimeout(function () {
       state.splashOpen = false
     }, 5000)
+  },
+  clicked (state, num) {
+    let wall = state.buttons[num].wall
+    let rightBtn = state.buttons[num + 1]
+    let leftBtn = state.buttons[num - 1]
+    let topBtn = state.buttons[num - 5]
+    let bottomBtn = state.buttons[num + 5]
+
+    state.buttons[num].isActive = !state.buttons[num].isActive
+
+    if (wall.indexOf('left') === -1) {
+      leftBtn.isActive = !leftBtn.isActive
+    }
+    if (wall.indexOf('right') === -1) {
+      rightBtn.isActive = !rightBtn.isActive
+    }
+    if (wall.indexOf('top') === -1) {
+      topBtn.isActive = !topBtn.isActive
+    }
+    if (wall.indexOf('bottom') === -1) {
+      bottomBtn.isActive = !bottomBtn.isActive
+    }
   }
 }
 
@@ -85,7 +107,8 @@ const actions = {
   checkList: ({ commit }) => commit('checkList'),
   randomStart: ({ commit }) => commit('randomStart'),
   viewed: ({ commit }) => commit('viewed'),
-  splashOpen: ({ commit }) => commit('splashOpen')
+  splashOpen: ({ commit }) => commit('splashOpen'),
+  clicked: ({ commit }, num) => commit('clicked', num)
 }
 
 export default new Vuex.Store({
