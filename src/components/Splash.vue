@@ -3,10 +3,10 @@
     <div class="splash" v-if="this.$store.state.splashOpen">
       <div class="splash__text">
         <div class="">
-          Push Buttons
+          PUSH BUTTONS
         </div>
         <div class="">
-          Change Them All WHITE!
+          TO CHANGE THEM ALL WHITE!
         </div>
       </div>
     </div>
